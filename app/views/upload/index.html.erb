@@ -1,0 +1,9 @@
+<h2>Import</h2>
+<h4>(Choose file, then click Import)</h4>
+	
+<%= form_with(url: {action: :import}, multipart: true) do %>
+	<%= file_field_tag 'csv_file' %>
+  	<%= submit_tag "Import" %>
+<% end %>
+
+<h2><%= link_to "Home", root_path =%></h2>

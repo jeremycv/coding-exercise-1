@@ -1,0 +1,66 @@
+<h2>People</h2>
+<% if flash[:alert] %>
+	<h3><%= flash[:alert] %></h3>
+<% end %>
+<div class="table-wrapper">
+	<table class="fl-table">
+		<tbody>
+			<tr>
+				<td>
+					<%= form_tag persons_index_path, :method => 'get' do %>
+					<%= text_field_tag :search, params[:search] %>
+					<%= submit_tag "Search", :first_name => nil %>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to "Import CSV file", upload_index_path %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="table-wrapper">
+	<table class="fl-table">
+		<thead>
+			<tr>
+				<th><%= sortable "first_name", "First Name" %></th>
+				<th><%= sortable "last_name", "Last Name" %></th>
+				<th><%= sortable "location.name", "Location"%></th>
+				<th><%= sortable "species", "Species"%></th>
+				<th><%= sortable "gender", "Gender"%></th>
+				<th><%= sortable "affiliation.name", "Affiliations"%></th>
+				<th><%= sortable "weapon", "Weapon"%></th>
+				<th><%= sortable "vehicle", "Vehicle"%></th>
+			</tr>
+		</thead>
+ 
+ 		<tbody>
+			<% for person in @persons %>
+				<tr>
+					<td><%= person.first_name %></td>
+					<td><%= person.last_name %></td>
+					<td><%= person.location.name %></td>
+					<td><%= person.species %></td>
+					<td><%= person.gender %></td>
+					<td><%= person.affiliation.name %></td>
+					<td><%= person.weapon %></td>
+					<td><%= person.vehicle %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<div class="table-wrapper">
+	<table class="fl-table">
+		<tbody>
+			<tr>
+				<td>
+					<%= page_entries_info @persons %>
+					<%= will_paginate @persons %>
+				</td>
+			</tr>
+		</tbody>
+    </table>
+ </div>
